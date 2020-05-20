@@ -35,7 +35,16 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = new Order;
+
+        $order->fullname = $request->fullname;
+        $order->phone = $request->phone;
+        $order->address = $request->address;
+        $order->number = time();
+
+        $order->save();
+
+        return view('front.success', compact('order'));
     }
 
     /**

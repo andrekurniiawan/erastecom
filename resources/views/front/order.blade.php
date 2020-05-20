@@ -7,8 +7,8 @@
       <h1>Order Information</h1>
     </div>
     <div class="order-information">
-      <p>Name</p>
-      <p>Price</p>
+      <p>{{ $product->name }}</p>
+      <p>{{ $product->price }}</p>
       <p>Qty</p>
     </div>
   </div>
@@ -16,18 +16,19 @@
     <div class="title">
       <h1>Customer Information</h1>
     </div>
-    <form>
+    <form id="form" action="{{ route('order.store', $product->id) }}" method="POST">
+      @csrf
       <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Name">
+        <label for="fullname">Full Name</label>
+        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Full Name">
       </div>
       <div class="form-group">
         <label for="phone">Phone</label>
-        <input type="text" class="form-control" id="phone" placeholder="Phone Number">
+        <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone Number">
       </div>
       <div class="form-group">
         <label for="address">Address</label>
-        <input type="text" class="form-control" id="Address" placeholder="Address">
+        <input type="text" class="form-control" id="address" name="address" placeholder="Address">
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>

@@ -6,10 +6,10 @@
     <h1>Success</h1>
   </div>
   <div class="order-information">
-    <p>Order No.</p>
-    <p>Product Name</p>
-    <p>Qty</p>
-    <p>Total</p>
+    <p>Order No.: {{ $order->number }}</p>
+    {{-- <p>Product Name: {{ $order->products->name }}</p> --}}
+    <p>Qty: 1</p>
+    {{-- <p>Total: {{ $order->products->price }}</p> --}}
   </div>
 </div>
 @endsection

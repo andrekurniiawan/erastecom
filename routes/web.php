@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,23 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('front.product');
-});
-Route::get('/order', function () {
-    return view('front.order');
-});
-Route::get('/success', function () {
-    return view('front.success');
-});
+Route::get('/', 'ProductController@index')->name('homepage');
+Route::resource('product', 'ProductController');
+Route::resource('order', 'OrderController');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/home/product', function () {
-    return view('back.product');
-});
-Route::get('/home/order', function () {
-    return view('back.order');
-});

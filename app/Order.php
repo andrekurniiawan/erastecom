@@ -9,8 +9,13 @@ class Order extends Model
 {
     use SoftDeletes;
 
-    public function product()
+    public function products()
     {
-        return $this->hasOne('App\Product');
+        return $this->belongsToMany('App\Product')->withTimestamps();
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'order';
     }
 }
