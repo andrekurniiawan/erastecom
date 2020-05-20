@@ -7,9 +7,9 @@
       <h1>Order Information</h1>
     </div>
     <div class="order-information">
-      <p>{{ $product->name }}</p>
-      <p>{{ $product->price }}</p>
-      <p>Qty</p>
+      <p>Product Name: {{ $product->name }}</p>
+      <p>Price: {{ $product->price }}</p>
+      <p>Quantity: 1</p>
     </div>
   </div>
   <div class="customer">
