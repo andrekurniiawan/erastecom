@@ -35,6 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Left Side Of Navbar -->
           <ul class="navbar-nav mr-auto">
+            @auth
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 Products <span class="caret"></span>
@@ -51,6 +52,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ route('user.index') }}">Users</a>
             </li>
+            @endauth
           </ul>
 
           <!-- Right Side Of Navbar -->
