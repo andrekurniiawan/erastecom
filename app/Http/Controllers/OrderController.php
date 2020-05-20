@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,7 +14,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::all();
+        return view('back.order.index', compact('orders'));
     }
 
     /**
@@ -23,9 +23,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return redirect()->route('product.show', $id);
     }
 
     /**
@@ -47,7 +47,7 @@ class OrderController extends Controller
 
         $order->products()->attach($request->product);
 
-        return view('front.success', compact('order'));
+        return redirect()->route('order.show', $order->id);
     }
 
     /**
@@ -56,9 +56,10 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show($id)
     {
-        //
+        $order = Order::find($id);
+        return view('front.success', compact('order'));
     }
 
     /**
@@ -67,9 +68,11 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
-        //
+        $order = Order::with('products')->find($id);
+        $product = $order->products->first();
+        return view('back.order.edit', compact('order', 'product'));
     }
 
     /**
@@ -79,9 +82,20 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Order $order)
+    public function update(Request $request, $id)
     {
-        //
+        $order = Order::find($id);
+
+        $order->fullname = $request->fullname;
+        $order->phone = $request->phone;
+        $order->address = $request->address;
+        $order->number = time();
+
+        $order->save();
+
+        $order->products()->sync($request->product);
+
+        return redirect()->route('order.index');
     }
 
     /**
@@ -90,8 +104,10 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+        return redirect()->back();
     }
 }

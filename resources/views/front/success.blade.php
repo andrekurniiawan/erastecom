@@ -8,7 +8,7 @@
   <div class="order-information">
     <p>Order No.: {{ $order->number }}</p>
     @foreach ($order->products as $product)
-    <div class="product-information">
+    <div class="order-item">
       <p>Product Name: {{ $product->name }}</p>
       <p>Qty: 1</p>
       <p>Total: {{ $product->price }}</p>
