@@ -56,7 +56,7 @@
 
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('user.create') }}">Register User</a>
-                <a class="dropdown-item" href="{{ route('user.index') }}">Product List</a>
+                <a class="dropdown-item" href="{{ route('user.index') }}">User List</a>
               </div>
             </li>
             @endauth
