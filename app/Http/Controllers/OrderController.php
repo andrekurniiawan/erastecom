@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreOrder;
 use App\Order;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -44,7 +44,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrder $request)
     {
         $order = new Order;
 
@@ -55,7 +55,7 @@ class OrderController extends Controller
 
         $order->save();
 
-        $order->products()->attach($request->product);
+        $order->products()->sync($request->product);
 
         return redirect()->route('order.show', $order->id);
     }
@@ -92,7 +92,7 @@ class OrderController extends Controller
      * @param  \App\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreOrder $request, $id)
     {
         $order = Order::find($id);
 

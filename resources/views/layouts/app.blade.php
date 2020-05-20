@@ -91,6 +91,9 @@
     </nav>
 
     <main class="py-4">
+      <div class="container">
+        @include('layouts.message')
+      </div>
       @yield('content')
     </main>
   </div>
