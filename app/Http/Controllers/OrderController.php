@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -43,6 +44,8 @@ class OrderController extends Controller
         $order->number = time();
 
         $order->save();
+
+        $order->products()->attach($request->product);
 
         return view('front.success', compact('order'));
     }

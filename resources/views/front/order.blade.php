@@ -16,7 +16,7 @@
     <div class="title">
       <h1>Customer Information</h1>
     </div>
-    <form id="form" action="{{ route('order.store', $product->id) }}" method="POST">
+    <form id="form" action="{{ route('order.store')}}" method="POST">
       @csrf
       <div class="form-group">
         <label for="fullname">Full Name</label>
@@ -30,6 +30,7 @@
         <label for="address">Address</label>
         <input type="text" class="form-control" id="address" name="address" placeholder="Address">
       </div>
+      <input type="hidden" class="form-control" id="product" name="product" value="{{ $product->id }}">
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

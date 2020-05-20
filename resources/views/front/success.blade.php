@@ -7,9 +7,13 @@
   </div>
   <div class="order-information">
     <p>Order No.: {{ $order->number }}</p>
-    {{-- <p>Product Name: {{ $order->products->name }}</p> --}}
-    <p>Qty: 1</p>
-    {{-- <p>Total: {{ $order->products->price }}</p> --}}
+    @foreach ($order->products as $product)
+    <div class="product-information">
+      <p>Product Name: {{ $product->name }}</p>
+      <p>Qty: 1</p>
+      <p>Total: {{ $product->price }}</p>
+    </div>
+    @endforeach
   </div>
 </div>
 @endsection
