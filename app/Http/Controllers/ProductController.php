@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('front.product', compact('products'));
+        return view('back.product.index', compact('products'));
     }
 
     /**
@@ -25,8 +25,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $products = Product::all();
-        return view('back.product', compact('products'));
+        return view('back.product.create');
     }
 
     /**
@@ -65,9 +64,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('back.product.edit', compact('product'));
     }
 
     /**
@@ -77,9 +77,16 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+
+        $product->name = $request->name;
+        $product->price = $request->price;
+
+        $product->save();
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -88,8 +95,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->back();
     }
 }
