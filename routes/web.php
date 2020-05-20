@@ -14,9 +14,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('front.product');
+});
+Route::get('/order', function () {
+    return view('front.order');
+});
+Route::get('/success', function () {
+    return view('front.success');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home/product', function () {
+    return view('back.product');
+});
+Route::get('/home/order', function () {
+    return view('back.order');
+});
