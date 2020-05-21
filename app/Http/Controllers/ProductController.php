@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected function saveRequest(StoreProduct $request, $product)
+    {
+        $product->name = $request->name;
+        $product->price = $request->price;
+
+        $product->save();
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -51,12 +59,7 @@ class ProductController extends Controller
     public function store(StoreProduct $request)
     {
         $product = new Product;
-
-        $product->name = $request->name;
-        $product->price = $request->price;
-
-        $product->save();
-
+        $this->saveRequest($request, $product);
         return redirect()->route('product.index');
     }
 
@@ -94,12 +97,7 @@ class ProductController extends Controller
     public function update(StoreProduct $request, $id)
     {
         $product = Product::find($id);
-
-        $product->name = $request->name;
-        $product->price = $request->price;
-
-        $product->save();
-
+        $this->saveRequest($request, $product);
         return redirect()->route('product.index');
     }
 
