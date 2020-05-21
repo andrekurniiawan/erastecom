@@ -30,7 +30,6 @@ class ProductController extends Controller
             return datatables()->of($products)->make(true);
         }
         return view('back.product.index');
-        // return view('back.product.index', compact('products'));
     }
 
     /**

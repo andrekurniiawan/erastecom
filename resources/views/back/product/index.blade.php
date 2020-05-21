@@ -9,24 +9,8 @@
     <thead>
       <td>Name</td>
       <td>Price</td>
-      {{-- <td>Action</td> --}}
+      <td width="1%">Action</td>
     </thead>
-    {{-- <tbody>
-      @foreach ($products as $product)
-      <tr>
-        <td>{{ $product->name }}</td>
-    <td>{{ $product->price }}</td>
-    <td>
-      <a href="{{ route('product.edit', $product->id) }}">Edit</a>
-      <form action="{{ route('product.destroy', $product->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <input type="submit" onClick="actionConfirm()" value="Delete">
-      </form>
-    </td>
-    </tr>
-    @endforeach
-    </tbody> --}}
   </table>
 </div>
 @endsection
@@ -54,6 +38,13 @@ $(document).ready(function() {
       {
         data: 'price',
         name: 'price'
+      },
+      {
+        data: 'action',
+        name: 'action',
+        render: function(data, type, row) {
+          return '<div class="d-flex flex-row"><a href="product/' + row.id + '/edit" class="btn btn-success btn-sm mx-1">Edit</a><form action="product/' + row.id + '" method="POST"> @csrf @method("DELETE") <input type="submit" onClick="actionConfirm()" class="btn btn-danger btn-sm mx-1" value="Delete"></form>';
+        }
       },
     ],
     "order": [
