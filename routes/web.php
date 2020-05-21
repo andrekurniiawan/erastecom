@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('product', 'ProductController');
+Route::get('trash/product', 'ProductController@trash')->name('product.trash');
+Route::post('trash/product/{product}/restore', 'ProductController@restore')->name('product.restore');
+Route::delete('trash/product/{product}/kill', 'ProductController@kill')->name('product.kill');
+
 Route::resource('order', 'OrderController');
 Route::resource('user', 'UserController');
 

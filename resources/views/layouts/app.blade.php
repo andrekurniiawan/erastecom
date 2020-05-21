@@ -43,6 +43,7 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item" href="{{ route('product.create') }}">Create Product</a>
                 <a class="dropdown-item" href="{{ route('product.index') }}">Product List</a>
+                <a class="dropdown-item" href="{{ route('product.trash') }}">Deleted Products</a>
               </div>
             </li>
             <li class="nav-item">

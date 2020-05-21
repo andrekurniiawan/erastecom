@@ -115,4 +115,30 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->back();
     }
+
+    public function trash(Request $request)
+    {
+        // $this->authorize('viewAny', Product::class);
+        $products = Product::onlyTrashed()->get();
+        if ($request->ajax()) {
+            return datatables()->of($products)->make(true);
+        }
+        return view('back.product.trash');
+    }
+
+    public function restore($id)
+    {
+        $product = Product::withTrashed()->find($id);
+        // $this->authorize('restore', $product);
+        $product->restore();
+        return redirect()->back();
+    }
+
+    public function kill($id)
+    {
+        $product = Product::withTrashed()->find($id);
+        // $this->authorize('forceDelete', $product);
+        $product->forceDelete();
+        return redirect()->back();
+    }
 }

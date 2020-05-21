@@ -77,7 +77,7 @@ $(document).ready(function() {
         data: 'action',
         name: 'action',
         render: function(data, type, row) {
-          return '<div class="d-flex flex-row"><a href="order/' + row.id + '/edit" class="btn btn-success btn-sm mx-1">Edit</a><form action="order/' + row.id + '" method="POST"> @csrf @method("DELETE") <input type="submit" onClick="actionConfirm()" class="btn btn-danger btn-sm mx-1" value="Delete"></form>';
+          return '<div class="d-flex flex-row"><a href="order/' + row.id + '/edit" class="btn btn-success btn-sm mx-1">Edit</a><form action="order/' + row.id + '" method="POST"> @csrf @method("DELETE") <input type="submit" onClick="actionConfirm()" class="btn btn-danger btn-sm mx-1" value="Delete"></form></div>';
         }
       },
     ],
