@@ -131,4 +131,37 @@ class OrderController extends Controller
         $order->delete();
         return redirect()->back();
     }
+
+    public function trash(Request $request)
+    {
+        // $this->authorize('viewAny', Order::class);
+        $orders = Order::onlyTrashed()->get();
+        if ($request->ajax()) {
+            return datatables()->of($orders)
+                ->addColumn('name', function (Order $order) {
+                    return $order->products->first()->name;
+                })
+                ->addColumn('price', function (Order $order) {
+                    return $order->products->first()->price;
+                })
+                ->make(true);
+        }
+        return view('back.order.trash');
+    }
+
+    public function restore($id)
+    {
+        $order = Order::withTrashed()->find($id);
+        // $this->authorize('restore', $order);
+        $order->restore();
+        return redirect()->back();
+    }
+
+    public function kill($id)
+    {
+        $order = Order::withTrashed()->find($id);
+        // $this->authorize('forceDelete', $order);
+        $order->forceDelete();
+        return redirect()->back();
+    }
 }

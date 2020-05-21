@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
   <div class="title">
-    <h1>Orders</h1>
+    <h1>Deleted Orders</h1>
   </div>
   <table id="dataTables" class="table table-striped table-bordered" style="width:100%">
     <thead>
@@ -29,7 +29,7 @@ $(document).ready(function() {
     "processing": true,
     "serverSide": true,
     "ajax": {
-      "url": "{{ route('order.index') }}",
+      "url": "{{ route('order.trash') }}",
       "type": 'GET',
     },
     "columns": [{
@@ -48,7 +48,7 @@ $(document).ready(function() {
         data: 'action',
         name: 'action',
         render: function(data, type, row) {
-          return '<div class="d-flex flex-row"><a href="order/' + row.id + '/edit" class="btn btn-success btn-sm mx-1">Edit</a><form action="order/' + row.id + '" method="POST"> @csrf @method("DELETE") <input type="submit" onClick="actionConfirm()" class="btn btn-danger btn-sm mx-1" value="Delete"></form></div>';
+          return '<div class="d-flex flex-row"><form action="order/' + row.id + '/restore" method="POST"> @csrf <input type="submit" class="btn btn-success btn-sm mx-1" value="Restore"></form><form action="order/' + row.id + '/kill" method="POST"> @csrf @method("DELETE") <input type="submit" onClick="actionConfirm()" class="btn btn-danger btn-sm mx-1" value="Delete Permanently"></form></div>';
         }
       },
     ],

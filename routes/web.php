@@ -19,6 +19,10 @@ Route::post('trash/product/{product}/restore', 'ProductController@restore')->nam
 Route::delete('trash/product/{product}/kill', 'ProductController@kill')->name('product.kill');
 
 Route::resource('order', 'OrderController');
+Route::get('trash/order', 'OrderController@trash')->name('order.trash');
+Route::post('trash/order/{order}/restore', 'OrderController@restore')->name('order.restore');
+Route::delete('trash/order/{order}/kill', 'OrderController@kill')->name('order.kill');
+
 Route::resource('user', 'UserController');
 
 Auth::routes();

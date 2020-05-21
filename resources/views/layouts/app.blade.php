@@ -46,9 +46,19 @@
                 <a class="dropdown-item" href="{{ route('product.trash') }}">Deleted Products</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('order.index') }}">Orders</a>
+            <li class="nav-item dropdown">
+              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                Orders <span class="caret"></span>
+              </a>
+
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ route('order.index') }}">Order List</a>
+                <a class="dropdown-item" href="{{ route('order.trash') }}">Deleted Orders</a>
+              </div>
             </li>
+            {{-- <li class="nav-item">
+              <a class="nav-link" href="{{ route('order.index') }}">Orders</a>
+            </li> --}}
             <li class="nav-item dropdown">
               <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                 Users <span class="caret"></span>
