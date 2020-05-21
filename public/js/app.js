@@ -65063,6 +65063,13 @@ $(document).ready(function () {
   });
 });
 
+window.deleteConfirm = function (event) {
+  if (confirm("Are you sure you want to delete?")) {//
+  } else {
+    event.preventDefault();
+  }
+};
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":

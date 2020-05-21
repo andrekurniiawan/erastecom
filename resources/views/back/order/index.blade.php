@@ -31,7 +31,7 @@
           <form action="{{ route('order.destroy', $order->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <input type="submit" value="Delete">
+            <input type="submit" onClick="deleteConfirm()" value="Delete">
           </form>
         </td>
       </tr>
