@@ -27,7 +27,14 @@ class OrderController extends Controller
     {
         $orders = Order::all();
         if ($request->ajax()) {
-            return datatables()->of($orders)->make(true);
+            return datatables()->of($orders)
+                ->addColumn('name', function (Order $order) {
+                    return $order->products->first()->name;
+                })
+                ->addColumn('price', function (Order $order) {
+                    return $order->products->first()->price;
+                })
+                ->make(true);
         }
         return view('back.order.index');
     }

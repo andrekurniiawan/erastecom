@@ -8,8 +8,8 @@
   <table id="dataTables" class="table table-striped table-bordered" style="width:100%">
     <thead>
       <td>Order Code</td>
-      {{-- <td>Products</td>
-      <td>Total</td> --}}
+      <td>Products</td>
+      <td>Total</td>
       <td width="1%">Action</td>
     </thead>
     {{-- <tbody>
@@ -65,14 +65,14 @@ $(document).ready(function() {
         data: 'number',
         name: 'number'
       },
-      //   {
-      //     data: 'name',
-      //     name: 'name'
-      //   },
-      //   {
-      //     data: 'price',
-      //     name: 'price'
-      //   },
+      {
+        data: 'name',
+        name: 'name'
+      },
+      {
+        data: 'price',
+        name: 'price'
+      },
       {
         data: 'action',
         name: 'action',
