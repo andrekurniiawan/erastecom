@@ -11,22 +11,6 @@
       <td>Email</td>
       <td>Action</td>
     </thead>
-    <tbody>
-      @foreach ($users as $user)
-      <tr>
-        <td>{{ $user->name }}</td>
-        <td>{{ $user->email }}</td>
-        <td>
-          <a href="{{ route('user.edit', $user->id) }}">Edit</a>
-          <form action="{{ route('user.destroy', $user->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <input type="submit" onClick="actionConfirm()" value="Delete">
-          </form>
-        </td>
-      </tr>
-      @endforeach
-    </tbody>
   </table>
 </div>
 @endsection
@@ -41,6 +25,31 @@ $(document).ready(function() {
     "ordering": true,
     "info": true,
     "autoWidth": true,
+    "processing": true,
+    "serverSide": true,
+    "ajax": {
+      "url": "{{ route('user.index') }}",
+      "type": 'GET',
+    },
+    "columns": [{
+        data: 'name',
+        name: 'name'
+      },
+      {
+        data: 'email',
+        name: 'email'
+      },
+      {
+        data: 'action',
+        name: 'action',
+        render: function(data, type, row) {
+          return '<div class="d-flex flex-row"><a href="user/' + row.id + '/edit" class="btn btn-success btn-sm mx-1">Edit</a><form action="user/' + row.id + '" method="POST"> @csrf @method("DELETE") <input type="submit" onClick="actionConfirm()" class="btn btn-danger btn-sm mx-1" value="Delete"></form>';
+        }
+      },
+    ],
+    "order": [
+      [0, 'asc']
+    ]
   });
 });
 

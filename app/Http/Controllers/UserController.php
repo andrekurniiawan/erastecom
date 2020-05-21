@@ -23,10 +23,13 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::all();
-        return view('back.user.index', compact('users'));
+        if ($request->ajax()) {
+            return datatables()->of($users)->make(true);
+        }
+        return view('back.user.index');
     }
 
     /**
