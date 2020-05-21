@@ -5,19 +5,28 @@
   <div class="title">
     <h1>Users</h1>
   </div>
-  <div class="user-information">
-    @foreach ($users as $user)
-    <div class="user-item">
-      <p>User Name: {{ $user->name }}</p>
-      <p>Email: {{ $user->email }}</p>
-      <a href="{{ route('user.edit', $user->id) }}">Edit</a>
-      <form action="{{ route('user.destroy', $user->id) }}" method="POST">
-        @csrf
-        @method('DELETE')
-        <input type="submit" value="Delete">
-      </form>
-    </div>
-    @endforeach
-  </div>
+  <table id="dataTables" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Action</td>
+    </thead>
+    <tbody>
+      @foreach ($users as $user)
+      <tr>
+        <td>{{ $user->name }}</td>
+        <td>{{ $user->email }}</td>
+        <td>
+          <a href="{{ route('user.edit', $user->id) }}">Edit</a>
+          <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="Delete">
+          </form>
+        </td>
+      </tr>
+      @endforeach
+    </tbody>
+  </table>
 </div>
 @endsection
