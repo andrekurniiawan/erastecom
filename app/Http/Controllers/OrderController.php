@@ -8,6 +8,18 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    protected function saveRequest(StoreOrder $request, $order)
+    {
+        $order->fullname = $request->fullname;
+        $order->phone = $request->phone;
+        $order->address = $request->address;
+        $order->number = time();
+
+        $order->save();
+
+        $order->products()->sync($request->product);
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -66,16 +78,7 @@ class OrderController extends Controller
     public function store(StoreOrder $request)
     {
         $order = new Order;
-
-        $order->fullname = $request->fullname;
-        $order->phone = $request->phone;
-        $order->address = $request->address;
-        $order->number = time();
-
-        $order->save();
-
-        $order->products()->sync($request->product);
-
+        $this->saveRequest($request, $order);
         return redirect()->route('order.show', $order->id);
     }
 
@@ -114,16 +117,7 @@ class OrderController extends Controller
     public function update(StoreOrder $request, $id)
     {
         $order = Order::find($id);
-
-        $order->fullname = $request->fullname;
-        $order->phone = $request->phone;
-        $order->address = $request->address;
-        $order->number = time();
-
-        $order->save();
-
-        $order->products()->sync($request->product);
-
+        $this->saveRequest($request, $order);
         return redirect()->route('order.index');
     }
 
