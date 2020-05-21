@@ -29,10 +29,18 @@ class OrderController extends Controller
         if ($request->ajax()) {
             return datatables()->of($orders)
                 ->addColumn('name', function (Order $order) {
-                    return $order->products->first()->name;
+                    if (isset($order->products->first()->name)) {
+                        return $order->products->first()->name;
+                    } else {
+                        return "Product deleted";
+                    }
                 })
                 ->addColumn('price', function (Order $order) {
-                    return $order->products->first()->price;
+                    if (isset($order->products->first()->price)) {
+                        return $order->products->first()->price;
+                    } else {
+                        return "Product deleted";
+                    }
                 })
                 ->make(true);
         }
@@ -139,10 +147,18 @@ class OrderController extends Controller
         if ($request->ajax()) {
             return datatables()->of($orders)
                 ->addColumn('name', function (Order $order) {
-                    return $order->products->first()->name;
+                    if (isset($order->products->first()->name)) {
+                        return $order->products->first()->name;
+                    } else {
+                        return "Product deleted";
+                    }
                 })
                 ->addColumn('price', function (Order $order) {
-                    return $order->products->first()->price;
+                    if (isset($order->products->first()->price)) {
+                        return $order->products->first()->price;
+                    } else {
+                        return "Product deleted";
+                    }
                 })
                 ->make(true);
         }
