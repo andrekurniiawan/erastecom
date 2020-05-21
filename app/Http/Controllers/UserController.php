@@ -92,7 +92,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('user.index');
+        return redirect()->route('user.index')->with('success', 'User edited.');
     }
 
     /**
@@ -105,6 +105,6 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'User permanently deleted.');
     }
 }

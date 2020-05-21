@@ -79,7 +79,7 @@ class OrderController extends Controller
     {
         $order = new Order;
         $this->saveRequest($request, $order);
-        return redirect()->route('order.show', $order->id);
+        return redirect()->route('order.show', $order->id)->with('success', 'Order created.');
     }
 
     /**
@@ -118,7 +118,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $this->saveRequest($request, $order);
-        return redirect()->route('order.index');
+        return redirect()->route('order.show', $order->id)->with('success', 'Order edited.');
     }
 
     /**
@@ -131,7 +131,7 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $order->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Order deleted.');
     }
 
     public function trash(Request $request)
@@ -164,7 +164,7 @@ class OrderController extends Controller
         $order = Order::withTrashed()->find($id);
         // $this->authorize('restore', $order);
         $order->restore();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Order restored.');
     }
 
     public function kill($id)
@@ -172,6 +172,6 @@ class OrderController extends Controller
         $order = Order::withTrashed()->find($id);
         // $this->authorize('forceDelete', $order);
         $order->forceDelete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Order permanently deleted.');
     }
 }

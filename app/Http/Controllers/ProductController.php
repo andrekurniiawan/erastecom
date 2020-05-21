@@ -60,7 +60,7 @@ class ProductController extends Controller
     {
         $product = new Product;
         $this->saveRequest($request, $product);
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Product created.');
     }
 
     /**
@@ -98,7 +98,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $this->saveRequest($request, $product);
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success', 'Product edited.');
     }
 
     /**
@@ -111,7 +111,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Product deleted.');
     }
 
     public function trash(Request $request)
@@ -129,7 +129,7 @@ class ProductController extends Controller
         $product = Product::withTrashed()->find($id);
         // $this->authorize('restore', $product);
         $product->restore();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Product restored.');
     }
 
     public function kill($id)
@@ -137,6 +137,6 @@ class ProductController extends Controller
         $product = Product::withTrashed()->find($id);
         // $this->authorize('forceDelete', $product);
         $product->forceDelete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Product permanently deleted.');
     }
 }
