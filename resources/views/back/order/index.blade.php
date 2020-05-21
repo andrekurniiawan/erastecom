@@ -31,7 +31,7 @@
           <form action="{{ route('order.destroy', $order->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            <input type="submit" onClick="deleteConfirm()" value="Delete">
+            <input type="submit" onClick="actionConfirm()" value="Delete">
           </form>
         </td>
       </tr>
@@ -39,4 +39,20 @@
     </tbody>
   </table>
 </div>
+@endsection
+
+@section('script')
+<script>
+$(document).ready(function() {
+  $('#dataTables').DataTable({
+    "paging": true,
+    "lengthChange": true,
+    "searching": true,
+    "ordering": true,
+    "info": true,
+    "autoWidth": true,
+  });
+});
+
+</script>
 @endsection

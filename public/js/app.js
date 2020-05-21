@@ -65052,19 +65052,9 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 var app = new Vue({
   el: '#app'
 });
-$(document).ready(function () {
-  $('#dataTables').DataTable({
-    "paging": true,
-    "lengthChange": true,
-    "searching": true,
-    "ordering": true,
-    "info": true,
-    "autoWidth": true
-  });
-});
 
-window.deleteConfirm = function (event) {
-  if (confirm("Are you sure you want to delete?")) {//
+window.actionConfirm = function (event) {
+  if (confirm("Are you sure?")) {//
   } else {
     event.preventDefault();
   }
