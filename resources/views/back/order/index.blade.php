@@ -17,14 +17,18 @@
       <tr>
         <td>{{ $order->number }}</td>
         <td>
-          @foreach ($order->products as $product)
-          {{ $product->name }}
-          @endforeach
+          <ul>
+            @foreach ($order->products as $product)
+            <li>{{ $product->name }}</li>
+            @endforeach
+          </ul>
         </td>
         <td>
-          @foreach ($order->products as $product)
-          {{ $product->price }}
-          @endforeach
+          <ul>
+            @foreach ($order->products as $product)
+            <li>{{ $product->price }}</li>
+            @endforeach
+          </ul>
         </td>
         <td>
           <a href="{{ route('order.edit', $order->id) }}">Edit</a>
