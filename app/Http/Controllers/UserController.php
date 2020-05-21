@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUser;
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -85,13 +87,20 @@ class UserController extends Controller
      */
     public function update(StoreUser $request, $id)
     {
-        $user = User::find($id);
+        DB::beginTransaction();
+        try {
+            $user = User::find($id);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
+            $user->name = $request->name;
+            $user->email = $request->email;
 
-        $user->save();
+            $user->save();
 
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
         return redirect()->route('user.index')->with('success', 'User edited.');
     }
 

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreOrder;
 use App\Order;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -77,8 +79,16 @@ class OrderController extends Controller
      */
     public function store(StoreOrder $request)
     {
-        $order = new Order;
-        $this->saveRequest($request, $order);
+        DB::beginTransaction();
+        try {
+            $order = new Order;
+            $this->saveRequest($request, $order);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
         return redirect()->route('order.show', $order->id)->with('success', 'Order created.');
     }
 
@@ -116,8 +126,16 @@ class OrderController extends Controller
      */
     public function update(StoreOrder $request, $id)
     {
-        $order = Order::find($id);
-        $this->saveRequest($request, $order);
+        DB::beginTransaction();
+        try {
+            $order = Order::find($id);
+            $this->saveRequest($request, $order);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
         return redirect()->route('order.show', $order->id)->with('success', 'Order edited.');
     }
 

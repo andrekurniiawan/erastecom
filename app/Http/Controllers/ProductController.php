@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProduct;
 use App\Product;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -58,8 +60,16 @@ class ProductController extends Controller
      */
     public function store(StoreProduct $request)
     {
-        $product = new Product;
-        $this->saveRequest($request, $product);
+        DB::beginTransaction();
+        try {
+            $product = new Product;
+            $this->saveRequest($request, $product);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
         return redirect()->route('product.index')->with('success', 'Product created.');
     }
 
@@ -96,8 +106,16 @@ class ProductController extends Controller
      */
     public function update(StoreProduct $request, $id)
     {
-        $product = Product::find($id);
-        $this->saveRequest($request, $product);
+        DB::beginTransaction();
+        try {
+            $product = Product::find($id);
+            $this->saveRequest($request, $product);
+
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
         return redirect()->route('product.index')->with('success', 'Product edited.');
     }
 
