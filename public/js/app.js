@@ -65049,8 +65049,10 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-var app = new Vue({
-  el: '#app'
+window.addEventListener('load', function () {
+  var app = new Vue({
+    el: '#app'
+  });
 });
 
 window.actionConfirm = function (event) {

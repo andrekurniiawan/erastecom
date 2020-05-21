@@ -23,10 +23,14 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::all();
-        return view('back.product.index', compact('products'));
+        if ($request->ajax()) {
+            return datatables()->of($products)->make(true);
+        }
+        return view('back.product.index');
+        // return view('back.product.index', compact('products'));
     }
 
     /**
