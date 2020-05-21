@@ -9,7 +9,7 @@
     <thead>
       <td>Name</td>
       <td>Email</td>
-      <td>Action</td>
+      <td width="1%">Action</td>
     </thead>
   </table>
 </div>
