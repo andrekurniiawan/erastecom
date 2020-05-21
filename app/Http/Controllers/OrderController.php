@@ -23,10 +23,13 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $orders = Order::all();
-        return view('back.order.index', compact('orders'));
+        if ($request->ajax()) {
+            return datatables()->of($orders)->make(true);
+        }
+        return view('back.order.index');
     }
 
     /**
